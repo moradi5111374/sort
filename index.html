@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="style.css" rel="stylesheet">
+
+
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> -->
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
+
+
+</head>
+<body>
+
+
+  <style>
+    body {
+      margin: 0 auto;
+      padding: 0 auto;
+      background: skyblue;
+    }
+
+    .full-item {
+      width: 800px;
+      height: 600px;
+      margin: 50px auto;
+      background: grey;
+    }
+
+    .full-item .button-item {
+      width: 100%;
+      height: 80px;
+      background: #B33771;
+    }
+
+    .full-item .button-item button {
+      margin: 30px 45%;
+    }
+
+    .full-item .item-sort {
+      width: 100%;
+      height: 500px;
+      background: white;
+      margin-top: 10px;
+    }
+
+    .full-item .item-sort:first-child {
+      margin-top: 10px;
+    }
+
+    .full-item .item-sort .item {
+      width: 90%;
+      height: 140px;
+      background: red;
+      margin: 10px auto;
+    }
+
+    .item-sort .item .pic {
+      width: 30%;
+      height: 100%;
+      background: #3B3B98;
+      float: left;
+    }
+
+    .item-sort .item .time {
+      width: 70%;
+      height: 100%;
+      background: #1B9CFC;
+      float: right;
+    }
+
+    .item-sort .item .time span {
+      color: white;
+      text-align: center;
+      display: block;
+      line-height: 100px;
+    }
+  </style>
+
+
+<div class="full-item">
+  <div class="buttons">
+    <div class="button-item">
+      <button id="sort" class="nosort">Sort</button>
+    </div>
+  </div>
+  <div class="item-sort">
+    <div class="item">
+      <div class="pic"></div>
+      <div class="time"><span>15:20</span></div>
+    </div>
+    <div class="item">
+      <div class="pic" style="background: green!important;"></div>
+      <div class="time"><span>13:10</span></div>
+    </div>
+    <div class="item">
+      <div class="pic"></div>
+      <div class="time"><span>18:40</span></div>
+    </div>
+  </div>
+</div>
+
+  <script>
+
+      const button = document.getElementById("sort");
+      const times = document.getElementsByClassName("time")
+    
+      const items = document.getElementsByClassName("item");
+
+      const originalHours = []
+      for (let i = 0; i < items.length; i++) {
+        const hour = items[i].innerText;
+        originalHours.push(hour)
+      }
+      const sortClasses = ["nosort","asc","desc"];
+      let cnt = 0;
+      button.addEventListener("click",function() {
+        let hours = originalHours.slice();
+        this.className="";
+        cnt++;
+        if (cnt>=sortClasses.length) cnt=0;
+        this.classList.toggle(sortClasses[cnt]);
+        if (this.classList.contains("asc")) hours.sort()
+        else if (this.classList.contains("desc")) hours.sort().reverse()
+        for (let i = 0; i < hours.length; i++) {
+          times[i].firstElementChild.innerText = hours[i];
+        }
+      });
+
+  </script>
+</body>
+</html>
